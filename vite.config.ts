@@ -17,6 +17,10 @@ export default defineConfig(({ mode }) => ({
     sourcemap: true,
     // Ensure assets are properly hashed
     assetsDir: "assets",
+    // Make sure the output is optimized for GitHub Pages
+    outDir: "dist",
+    // Enable minification
+    minify: true,
   },
   plugins: [
     react(),
