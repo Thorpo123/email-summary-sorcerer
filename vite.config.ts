@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -9,6 +10,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // Add the base path to match your GitHub Pages repository name
+  base: "/email-summary-sorcerer/",
   plugins: [
     react(),
     mode === 'development' &&
