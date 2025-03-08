@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card } from "@/components/ui/card";
 
 interface TimeRangeSelectorProps {
@@ -9,6 +9,27 @@ interface TimeRangeSelectorProps {
 }
 
 const TimeRangeSelector = ({ startTime, endTime, onTimeChange }: TimeRangeSelectorProps) => {
+  // Validate and fix time formats on component mount
+  useEffect(() => {
+    const validateTimeFormat = (time: string) => {
+      // Check if time is in valid format
+      const isValidTime = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(time);
+      if (!isValidTime) {
+        console.warn(`Invalid time format detected: ${time}, resetting to default`);
+        return "00:00";
+      }
+      return time;
+    };
+    
+    const validatedStart = validateTimeFormat(startTime);
+    const validatedEnd = validateTimeFormat(endTime);
+    
+    // If either time was invalid, update with valid defaults
+    if (validatedStart !== startTime || validatedEnd !== endTime) {
+      onTimeChange(validatedStart, validatedEnd);
+    }
+  }, []);
+  
   return (
     <Card className="p-6 mb-8 animate-fade-in bg-white/80 backdrop-blur-sm border border-gray-100">
       <div className="space-y-4">
