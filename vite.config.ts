@@ -10,8 +10,14 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  // Add the base path to match your GitHub Pages repository name
+  // Ensure this matches your GitHub repository name exactly
   base: "/email-summary-sorcerer/",
+  build: {
+    // Output more detailed information during build
+    sourcemap: true,
+    // Ensure assets are properly hashed
+    assetsDir: "assets",
+  },
   plugins: [
     react(),
     mode === 'development' &&
