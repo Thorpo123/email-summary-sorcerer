@@ -15,12 +15,18 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Output more detailed information during build
     sourcemap: true,
-    // Ensure assets are properly hashed
+    // Ensure assets are properly hashed and referenced correctly
     assetsDir: "assets",
     // Make sure the output is optimized for GitHub Pages
     outDir: "dist",
     // Enable minification
     minify: true,
+    // Make sure all paths are relative
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
   plugins: [
     react(),
